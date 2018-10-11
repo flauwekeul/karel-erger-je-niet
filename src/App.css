@@ -5,6 +5,7 @@
     margin: 2vmin auto;
     border: 5px solid var(--color-red);
     border-radius: 1vmin;
+    background-color: var(--color-board);
 }
 
 .App::after {

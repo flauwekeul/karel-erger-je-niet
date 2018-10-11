@@ -1,7 +1,7 @@
 :root {
   --color-black: #111;
   --color-white: #fff;
-  --color-board: #fff7ad;
+  --color-board: #fff9ba;
   --color-red: #f33;
   --color-blue: #07e;
   --color-green: #2c4;
@@ -16,5 +16,4 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: var(--color-board);
 }

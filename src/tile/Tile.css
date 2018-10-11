@@ -4,3 +4,19 @@
     border-radius: 999px;
     background-color: var(--color-white);
 }
+
+.Tile.red {
+    background-color: var(--color-red);
+}
+
+.Tile.blue {
+    background-color: var(--color-blue);
+}
+
+.Tile.green {
+    background-color: var(--color-green);
+}
+
+.Tile.yellow {
+    background-color: var(--color-yellow);
+}
