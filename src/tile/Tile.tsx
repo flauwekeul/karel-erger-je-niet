@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import * as React from 'react';
 import './Tile.css';
 
-const Tile = ({ x, y, size, margin, offset, player }: TileProps) => {
+const Tile = ({ x, y, size, margin, offset, next, player }: TileProps) => {
     const position = (coordinate: number) => coordinate * (size + 2 * margin) + margin + offset
     // todo: use styled components?
     const style = {
@@ -11,7 +11,7 @@ const Tile = ({ x, y, size, margin, offset, player }: TileProps) => {
         top: `${position(y)}%`,
         width: `${size}%`,
     };
-    const className = classNames('Tile', player)
+    const className = classNames('Tile', next, player)
 
     return <div className={className} style={style} />
 };
@@ -25,9 +25,12 @@ export interface TileProps {
     margin: number;
     offset: number;
     type: tileType;
+    next: direction;
     player?: playerName;
 }
 
 export type tileType = 'home' | 'neutral' | 'start' | 'base';
 
 export type playerName = 'red' | 'blue' | 'green' | 'yellow';
+
+export type direction = 'up' | 'right' | 'down' | 'left';
