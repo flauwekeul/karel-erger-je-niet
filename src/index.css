@@ -1,5 +1,20 @@
+:root {
+  --color-black: #111;
+  --color-white: #fff;
+  --color-board: #fff7ad;
+  --color-red: #f33;
+  --color-blue: #07e;
+  --color-green: #2c4;
+  --color-yellow: #fd0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: var(--color-board);
 }

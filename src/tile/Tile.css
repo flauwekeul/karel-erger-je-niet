@@ -1,0 +1,7 @@
+.Tile {
+    width: 6vmin;
+    height: 6vmin;
+    border: 3px solid var(--color-black);
+    border-radius: 999px;
+    background-color: var(--color-white);
+}
