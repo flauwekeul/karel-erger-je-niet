@@ -1,6 +1,5 @@
 .Tile {
-    width: 6vmin;
-    height: 6vmin;
+    position: absolute;
     border: 3px solid var(--color-black);
     border-radius: 999px;
     background-color: var(--color-white);

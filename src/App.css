@@ -1,9 +1,8 @@
 .App {
     position: relative;
-    width: 100vmin;
+    width: 96vmin;
     height: 96vmin;
     margin: 2vmin auto;
-    /* padding: 5vmin; */
     border: 5px solid var(--color-red);
     border-radius: 1vmin;
 }
