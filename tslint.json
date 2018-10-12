@@ -2,7 +2,8 @@
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "rules": {
     "interface-name": [true, "never-prefix"],
-    "member-access": [true, "no-public"]
+    "member-access": [true, "no-public"],
+    "semicolon": [true, "never"]
   },
   "linterOptions": {
     "exclude": [

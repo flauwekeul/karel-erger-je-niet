@@ -1,12 +1,13 @@
-import classNames from 'classnames';
-import * as React from 'react';
-import './Tile.css';
+import classNames from 'classnames'
+import * as React from 'react'
+import './Tile.css'
 
 export class Tile extends React.PureComponent<TileProps> {
+    static playerNames: playerNames = ['red', 'blue', 'green', 'yellow']
+
     offset = 4
     margin = 1
-    size = ((100 - 2 * this.offset) / 11) - (2 * this.margin);
-    playerNames: playerNames = ['red', 'blue', 'green', 'yellow'];
+    size = ((100 - 2 * this.offset) / 11) - (2 * this.margin)
 
     // todo: use styled components?
     get styles() {
@@ -21,7 +22,7 @@ export class Tile extends React.PureComponent<TileProps> {
     get classNames() {
         const eleventh = this.props.index / 10
         return classNames('Tile', this.props.next, {
-            [this.playerNames[eleventh]]: Number.isInteger(eleventh)
+            [Tile.playerNames[eleventh]]: Number.isInteger(eleventh)
         })
     }
 
@@ -35,14 +36,14 @@ export class Tile extends React.PureComponent<TileProps> {
 }
 
 export interface TileProps {
-    index: number;
-    x: number;
-    y: number;
-    next: direction;
+    index: number
+    x: number
+    y: number
+    next: direction
 }
 
-export type tileType = 'home' | 'neutral' | 'start' | 'base';
+export type tileType = 'home' | 'neutral' | 'start' | 'base'
 
-export type playerNames = ['red', 'blue', 'green', 'yellow'];
+export type playerNames = ['red', 'blue', 'green', 'yellow']
 
-export type direction = 'up' | 'right' | 'down' | 'left';
+export type direction = 'up' | 'right' | 'down' | 'left'

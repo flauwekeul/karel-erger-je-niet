@@ -1,8 +1,8 @@
-import * as React from 'react';
-import './App.css';
-import { direction, Tile } from './tile/Tile';
+import * as React from 'react'
+import './App.css'
+import { direction, Tile } from './tile/Tile'
 
-const tiles = [
+const pathTiles = [
   { x: 0, y: 4, next: 'right' as direction },
   { x: 1, y: 4, next: 'right' as direction },
   { x: 2, y: 4, next: 'right' as direction },
@@ -47,8 +47,8 @@ const tiles = [
 
 const App = () => (
   <div className="App">
-    {tiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
+    {pathTiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
   </div>
-);
+)
 
-export default App;
+export default App
