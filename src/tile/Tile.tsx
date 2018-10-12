@@ -12,11 +12,12 @@ export class Tile extends React.PureComponent<TileProps> {
 
     // todo: use styled components?
     render() {
-        const className = classNames('Tile', this.props.next, this.props.color)
+        const { x, y, next, color } = this.props
+        const className = classNames('Tile', next, color)
         const style = {
             height: `${this.size}%`,
-            left: `${this.position(this.props.x)}%`,
-            top: `${this.position(this.props.y)}%`,
+            left: `${this.position(x)}%`,
+            top: `${this.position(y)}%`,
             width: `${this.size}%`,
         }
 
@@ -32,7 +33,7 @@ export interface TileProps {
     index: number
     x: number
     y: number
-    next: direction
+    next?: direction
     color?: colorName
 }
 
