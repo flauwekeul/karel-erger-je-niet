@@ -47,7 +47,12 @@ const pathTiles = [
 
 const App = () => (
   <div className="App">
-    {pathTiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
+    {pathTiles.map((tile, i) => {
+      const eleventh = i / 10
+      const color = Number.isInteger(eleventh) ? Tile.colors[eleventh] : undefined
+
+      return <Tile key={i} index={i} {...tile} color={color} />
+    })}
   </div>
 )
 

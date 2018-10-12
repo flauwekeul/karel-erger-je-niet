@@ -3,31 +3,24 @@ import * as React from 'react'
 import './Tile.css'
 
 export class Tile extends React.PureComponent<TileProps> {
-    static playerNames: playerNames = ['red', 'blue', 'green', 'yellow']
+    static colors: colors = ['red', 'blue', 'green', 'yellow']
 
     offset = 4
     margin = 1
     size = ((100 - 2 * this.offset) / 11) - (2 * this.margin)
+    color: colorName
 
     // todo: use styled components?
-    get styles() {
-        return {
+    render() {
+        const className = classNames('Tile', this.props.next, this.props.color)
+        const style = {
             height: `${this.size}%`,
             left: `${this.position(this.props.x)}%`,
             top: `${this.position(this.props.y)}%`,
             width: `${this.size}%`,
         }
-    }
 
-    get classNames() {
-        const eleventh = this.props.index / 10
-        return classNames('Tile', this.props.next, {
-            [Tile.playerNames[eleventh]]: Number.isInteger(eleventh)
-        })
-    }
-
-    render() {
-        return <div className={this.classNames} style={this.styles} />
+        return <div className={className} style={style} />
     }
 
     private position(coordinate: number) {
@@ -40,10 +33,13 @@ export interface TileProps {
     x: number
     y: number
     next: direction
+    color?: colorName
 }
 
 export type tileType = 'home' | 'neutral' | 'start' | 'base'
 
-export type playerNames = ['red', 'blue', 'green', 'yellow']
+export type colorName = 'red' | 'blue' | 'green' | 'yellow'
+
+export type colors = [colorName, colorName, colorName, colorName]
 
 export type direction = 'up' | 'right' | 'down' | 'left'
