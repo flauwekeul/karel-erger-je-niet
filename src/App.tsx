@@ -22,6 +22,25 @@ const startTiles = [
   { x: 1, y: 10, color: Tile.colors[3] },
 ]
 
+const finishTiles = [
+  { x: 1, y: 5, color: Tile.colors[0] },
+  { x: 2, y: 5, color: Tile.colors[0] },
+  { x: 3, y: 5, color: Tile.colors[0] },
+  { x: 4, y: 5, color: Tile.colors[0] },
+  { x: 5, y: 1, color: Tile.colors[1] },
+  { x: 5, y: 2, color: Tile.colors[1] },
+  { x: 5, y: 3, color: Tile.colors[1] },
+  { x: 5, y: 4, color: Tile.colors[1] },
+  { x: 6, y: 5, color: Tile.colors[2] },
+  { x: 7, y: 5, color: Tile.colors[2] },
+  { x: 8, y: 5, color: Tile.colors[2] },
+  { x: 9, y: 5, color: Tile.colors[2] },
+  { x: 5, y: 6, color: Tile.colors[3] },
+  { x: 5, y: 7, color: Tile.colors[3] },
+  { x: 5, y: 8, color: Tile.colors[3] },
+  { x: 5, y: 9, color: Tile.colors[3] },
+]
+
 const pathTiles = [
   { x: 0, y: 4, next: 'right' as direction },
   { x: 1, y: 4, next: 'right' as direction },
@@ -69,14 +88,16 @@ const App = () => (
   <div className="App">
     <Title />
 
+    {startTiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
+
+    {finishTiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
+
     {pathTiles.map((tile, i) => {
       const eleventh = i / 10
       const color = Number.isInteger(eleventh) ? Tile.colors[eleventh] : undefined
 
       return <Tile key={i} index={i} {...tile} color={color} />
     })}
-
-    {startTiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
   </div>
 )
 
