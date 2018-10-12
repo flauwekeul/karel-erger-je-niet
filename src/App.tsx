@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.css';
-import Tile, { direction, playerName, TileProps, tileType } from './tile/Tile';
+import { direction, Tile } from './tile/Tile';
 
 const tiles = [
   { x: 0, y: 4, next: 'right' as direction },
@@ -45,22 +45,10 @@ const tiles = [
   { x: 0, y: 5, next: 'up' as direction },
 ]
 
-const App = () => {
-  const offset = 4
-  const margin = 1
-  const size = ((100 - 2 * offset) / 11) - (2 * margin);
-  const playerNames: [playerName, playerName, playerName, playerName] = ['red', 'blue', 'green', 'yellow'];
-
-  return <div className="App">
-    {tiles.map((tile, i) => {
-      const type: tileType = i % 10 === 0 ? 'start' : 'neutral'
-      const eleventh = i / 10
-      const player = Number.isInteger(eleventh) ? playerNames[eleventh] : undefined
-      const props: TileProps = { ...tile, size, margin, offset, type, player }
-
-      return <Tile key={i} {...props} />}
-    )}
+const App = () => (
+  <div className="App">
+    {tiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
   </div>
-};
+);
 
 export default App;

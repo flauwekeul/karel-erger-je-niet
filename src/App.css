@@ -11,9 +11,9 @@
 .App::after {
     content: '';
     position: absolute;
-    top: 1vmin;
-    right: 1vmin;
-    bottom: 1vmin;
-    left: 1vmin;
-    border: 3px solid var(--color-black);
+    top: 5px;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    border: 2px solid var(--color-black);
 }

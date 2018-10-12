@@ -2,35 +2,47 @@ import classNames from 'classnames';
 import * as React from 'react';
 import './Tile.css';
 
-const Tile = ({ x, y, size, margin, offset, next, player }: TileProps) => {
-    const position = (coordinate: number) => coordinate * (size + 2 * margin) + margin + offset
+export class Tile extends React.PureComponent<TileProps> {
+    offset = 4
+    margin = 1
+    size = ((100 - 2 * this.offset) / 11) - (2 * this.margin);
+    playerNames: playerNames = ['red', 'blue', 'green', 'yellow'];
+
     // todo: use styled components?
-    const style = {
-        height: `${size}%`,
-        left: `${position(x)}%`,
-        top: `${position(y)}%`,
-        width: `${size}%`,
-    };
-    const className = classNames('Tile', next, player)
+    get styles() {
+        return {
+            height: `${this.size}%`,
+            left: `${this.position(this.props.x)}%`,
+            top: `${this.position(this.props.y)}%`,
+            width: `${this.size}%`,
+        }
+    }
 
-    return <div className={className} style={style} />
-};
+    get classNames() {
+        const eleventh = this.props.index / 10
+        return classNames('Tile', this.props.next, {
+            [this.playerNames[eleventh]]: Number.isInteger(eleventh)
+        })
+    }
 
-export default Tile;
+    render() {
+        return <div className={this.classNames} style={this.styles} />
+    }
+
+    private position(coordinate: number) {
+        return coordinate * (this.size + 2 * this.margin) + this.margin + this.offset
+    }
+}
 
 export interface TileProps {
+    index: number;
     x: number;
     y: number;
-    size: number;
-    margin: number;
-    offset: number;
-    type: tileType;
     next: direction;
-    player?: playerName;
 }
 
 export type tileType = 'home' | 'neutral' | 'start' | 'base';
 
-export type playerName = 'red' | 'blue' | 'green' | 'yellow';
+export type playerNames = ['red', 'blue', 'green', 'yellow'];
 
 export type direction = 'up' | 'right' | 'down' | 'left';
