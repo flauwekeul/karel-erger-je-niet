@@ -5,44 +5,36 @@ import './Tile.css'
 export class Tile extends React.PureComponent<TileProps> {
     static colors: colors = ['red', 'blue', 'green', 'yellow']
 
-    offset = 4
     color: colorName
-
-    get size() {
-        const { margin } = this.props
-        return ((100 - 2 * this.offset) / 11) - (2 * margin)
-    }
 
     // todo: use styled components?
     render() {
-        const { x, y, next, color } = this.props
+        const { x, y, size, next, color } = this.props
         const className = classNames('Tile', next, color)
         const style = {
-            height: `${this.size}%`,
-            left: `${this.position(x)}%`,
-            top: `${this.position(y)}%`,
-            width: `${this.size}%`,
+            height: `${size}%`,
+            left: `${x}%`,
+            top: `${y}%`,
+            width: `${size}%`,
         }
 
         return <div className={className} style={style} />
     }
-
-    private position(coordinate: number) {
-        const { margin } = this.props
-        return coordinate * (this.size + 2 * margin) + margin + this.offset
-    }
 }
 
-export interface TileProps {
-    index: number
+export interface TileModel {
     x: number
     y: number
-    margin: number
-    next?: direction
+    type: tileType
     color?: colorName
+    next?: direction
 }
 
-export type tileType = 'home' | 'neutral' | 'start' | 'base'
+export interface TileProps extends TileModel {
+    size: number
+}
+
+export type tileType = 'start' | 'finish' | 'path' | 'spawn'
 
 export type colorName = 'red' | 'blue' | 'green' | 'yellow'
 
