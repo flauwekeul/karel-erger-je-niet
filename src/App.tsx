@@ -88,15 +88,15 @@ const App = () => (
   <div className="App">
     <Title />
 
-    {startTiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
+    {startTiles.map((tile, i) => <Tile key={i} {...tile} index={i} margin={1.5} />)}
 
-    {finishTiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
+    {finishTiles.map((tile, i) => <Tile key={i} {...tile} index={i} margin={1.5} />)}
 
     {pathTiles.map((tile, i) => {
       const eleventh = i / 10
       const color = Number.isInteger(eleventh) ? Tile.colors[eleventh] : undefined
 
-      return <Tile key={i} index={i} {...tile} color={color} />
+      return <Tile key={i} {...tile} index={i} margin={0.8} color={color} />
     })}
   </div>
 )

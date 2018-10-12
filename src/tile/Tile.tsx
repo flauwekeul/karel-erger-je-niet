@@ -6,9 +6,12 @@ export class Tile extends React.PureComponent<TileProps> {
     static colors: colors = ['red', 'blue', 'green', 'yellow']
 
     offset = 4
-    margin = 0.8
-    size = ((100 - 2 * this.offset) / 11) - (2 * this.margin)
     color: colorName
+
+    get size() {
+        const { margin } = this.props
+        return ((100 - 2 * this.offset) / 11) - (2 * margin)
+    }
 
     // todo: use styled components?
     render() {
@@ -25,7 +28,8 @@ export class Tile extends React.PureComponent<TileProps> {
     }
 
     private position(coordinate: number) {
-        return coordinate * (this.size + 2 * this.margin) + this.margin + this.offset
+        const { margin } = this.props
+        return coordinate * (this.size + 2 * margin) + margin + this.offset
     }
 }
 
@@ -33,6 +37,7 @@ export interface TileProps {
     index: number
     x: number
     y: number
+    margin: number
     next?: direction
     color?: colorName
 }
