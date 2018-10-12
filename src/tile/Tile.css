@@ -33,12 +33,12 @@
 .Tile.up::after,
 .Tile.down::after {
     width: 3px;
-    height: calc(2vmin + 3px); /* 2vmin is the tile margin */
+    height: 2vmin; /* 2vmin is the tile margin */
 }
 
 .Tile.right::after,
 .Tile.left::after {
-    width: calc(2vmin + 3px); /* 2vmin is the tile margin */
+    width: 2vmin; /* 2vmin is the tile margin */
     height: 3px;
 }
 

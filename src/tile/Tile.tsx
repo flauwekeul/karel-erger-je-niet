@@ -6,7 +6,7 @@ export class Tile extends React.PureComponent<TileProps> {
     static colors: colors = ['red', 'blue', 'green', 'yellow']
 
     offset = 4
-    margin = 1
+    margin = 0.8
     size = ((100 - 2 * this.offset) / 11) - (2 * this.margin)
     color: colorName
 
