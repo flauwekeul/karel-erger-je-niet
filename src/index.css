@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script:700');
+
 :root {
   --color-black: #111;
   --color-white: #fff;
@@ -6,6 +8,8 @@
   --color-blue: #07e;
   --color-green: #2c4;
   --color-yellow: #fd0;
+
+  --font-stack-fancy: 'Dancing Script', cursive;
 }
 
 * {

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import './App.css'
 import { direction, Tile } from './tile/Tile'
+import { Title } from './Title/Title'
 
 const startTiles = [
   { x: 0, y: 0, color: Tile.colors[0] },
@@ -66,12 +67,15 @@ const pathTiles = [
 
 const App = () => (
   <div className="App">
+    <Title />
+
     {pathTiles.map((tile, i) => {
       const eleventh = i / 10
       const color = Number.isInteger(eleventh) ? Tile.colors[eleventh] : undefined
 
       return <Tile key={i} index={i} {...tile} color={color} />
     })}
+
     {startTiles.map((tile, i) => <Tile key={i} index={i} {...tile} />)}
   </div>
 )
