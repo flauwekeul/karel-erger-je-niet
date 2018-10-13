@@ -1,13 +1,16 @@
 import * as React from 'react'
+import { randomNumber } from 'src/utils'
 import './Die.css'
 
-export const Die = ({ value }: DieProps) => {
+export const Die = ({ value, click }: DieProps) => {
     const style = {
-        transform: `rotate(${Math.floor(Math.random() * 360)}deg)`
+        left: `${randomNumber(63, 90)}%`,
+        top: `${randomNumber(10, 85)}%`,
+        transform: `rotate(${randomNumber(0, 360)}deg)`
     }
 
     return (
-        <div className={`Die value-${value}`} style={style}>
+        <div className={`Die value-${value}`} style={style} onClick={click}>
             <div className="dot top-left"/>
             <div className="dot top-right"/>
             <div className="dot center-left"/>
@@ -21,6 +24,7 @@ export const Die = ({ value }: DieProps) => {
 
 export interface DieProps {
     value: dieValue
+    click(): void
 }
 
 export type dieValue = 1 | 2 | 3 | 4 | 5 | 6

@@ -1,21 +1,26 @@
 .Die {
+    --time: 500ms;
+    --timing-function: ease-out;
+
+    cursor: pointer;
     position: absolute;
     width: 6vmin;
     height: 6vmin;
-    top: 40%;
-    left: 70%;
     background: radial-gradient(circle, var(--color-white) 70%,#dddddd 100%);
-    border-radius: 3px;
+    border-radius: 6px;
     box-shadow: 6px 3px 20px var(--color-shadow);
+    transition: top var(--time) var(--timing-function),
+        left var(--time) var(--timing-function),
+        transform var(--time) var(--timing-function);
 }
 
 .Die .dot {
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
     background-color: var(--color-black);
     border-radius: 999px;
-    margin: -3px 0 0 -3px;
+    margin: -5px 0 0 -5px;
 }
 
 .Die.value-1 .dot.top-left,

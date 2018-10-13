@@ -1,14 +1,33 @@
 import * as React from 'react'
 import Board from './Board/Board'
 import { Die, dieValue } from './Die/Die'
+import { randomNumber } from './utils'
 
-const randomDieValue = () => Math.floor(Math.random() * 6) + 1 as dieValue
+class App extends React.PureComponent<{}, AppState> {
+    constructor(props: {}) {
+        super(props)
+        this.state = {
+            value: randomNumber(1, 6) as dieValue
+        }
+    }
 
-const App = () => (
-    <>
-        <Board/>
-        <Die value={randomDieValue()} />
-    </>
-)
+    rollDie = () => {
+        this.setState({ value: randomNumber(1, 6) as dieValue })
+    }
+
+    render() {
+        const { value } = this.state
+        return (
+            <>
+                <Board/>
+                <Die value={value} click={this.rollDie} />
+            </>
+        )
+    }
+}
+
+export interface AppState {
+    value: dieValue
+}
 
 export default App
