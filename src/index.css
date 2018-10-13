@@ -12,6 +12,7 @@
   --color-green-light: #76CC87;
   --color-yellow: #fd0;
   --color-yellow-light: #FFEB66;
+  --color-shadow: rgba(1, 1, 1, 0.5);
 
   --font-stack-fancy: 'Dancing Script', cursive;
 }

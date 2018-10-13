@@ -1,0 +1,72 @@
+.Die {
+    position: absolute;
+    width: 6vmin;
+    height: 6vmin;
+    top: 40%;
+    left: 70%;
+    background: radial-gradient(circle, var(--color-white) 70%,#dddddd 100%);
+    border-radius: 3px;
+    box-shadow: 6px 3px 20px var(--color-shadow);
+}
+
+.Die .dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-black);
+    border-radius: 999px;
+    margin: -3px 0 0 -3px;
+}
+
+.Die.value-1 .dot.top-left,
+.Die.value-1 .dot.top-right,
+.Die.value-1 .dot.dot.center-left,
+.Die.value-1 .dot.dot.center-right,
+.Die.value-1 .dot.dot.bottom-left,
+.Die.value-1 .dot.dot.bottom-right,
+.Die.value-2 .dot.top-right,
+.Die.value-2 .dot.dot.center-left,
+.Die.value-2 .dot.dot.center,
+.Die.value-2 .dot.dot.center-right,
+.Die.value-2 .dot.dot.bottom-left,
+.Die.value-3 .dot.top-left,
+.Die.value-3 .dot.dot.center-left,
+.Die.value-3 .dot.dot.center-right,
+.Die.value-3 .dot.dot.bottom-right,
+.Die.value-4 .dot.dot.center-left,
+.Die.value-4 .dot.dot.center,
+.Die.value-4 .dot.dot.center-right,
+.Die.value-5 .dot.dot.center-left,
+.Die.value-5 .dot.dot.center-right,
+.Die.value-6 .dot.dot.center {
+    display: none;
+}
+
+.Die .dot.top-left {
+    top: 25%;
+    left: 25%;
+}
+.Die .dot.top-right {
+    top: 25%;
+    left: 75%;
+}
+.Die .dot.center-left {
+    top: 50%;
+    left: 25%;
+}
+.Die .dot.center {
+    top: 50%;
+    left: 50%;
+}
+.Die .dot.center-right {
+    top: 50%;
+    left: 75%;
+}
+.Die .dot.bottom-left {
+    top: 75%;
+    left: 25%;
+}
+.Die .dot.bottom-right {
+    top: 75%;
+    left: 75%;
+}
