@@ -87,7 +87,7 @@ const tiles: TileModel[] = [
 const App = () => (
   <div className="App">
     <Title/>
-    <Grid size={11} gutter={0.8} tiles={tiles} />
+    <Grid size={11} tiles={tiles} />
   </div>
 )
 

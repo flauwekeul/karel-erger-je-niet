@@ -7,7 +7,7 @@ export class Grid extends React.PureComponent<GridProps> {
 
     constructor(props: GridProps) {
         super(props)
-        this.tileSize = (100 / props.size) - (2 * props.gutter)
+        this.tileSize = 1 / props.size
     }
 
     render() {
@@ -24,8 +24,7 @@ export class Grid extends React.PureComponent<GridProps> {
     }
 
     private tilePosition(coordinate: number) {
-        const { gutter } = this.props
-        return coordinate * (this.tileSize + 2 * gutter) + gutter
+        return coordinate * this.tileSize
     }
 }
 
@@ -34,9 +33,5 @@ export interface GridProps {
      * Amount of tiles
      */
     size: number
-    /**
-     * Space around each tile
-     */
-    gutter: number
     tiles: TileModel[]
 }
