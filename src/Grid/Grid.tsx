@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Pawn, PawnModel } from 'src/Pawn/Pawn'
 import { Tile, TileModel } from 'src/tile/Tile'
 import './Grid.css'
 
@@ -11,7 +12,7 @@ export class Grid extends React.PureComponent<GridProps> {
     }
 
     render() {
-        const { tiles } = this.props
+        const { tiles, pawns } = this.props
 
         return <div className="Grid">
             {tiles.map((tile, i) => {
@@ -19,6 +20,12 @@ export class Grid extends React.PureComponent<GridProps> {
                 const y = this.tilePosition(tile.y)
 
                 return <Tile key={i} {...tile} x={x} y={y} size={this.tileSize} />
+            })}
+            {pawns.map((pawn, i) => {
+                const x = this.tilePosition(pawn.x)
+                const y = this.tilePosition(pawn.y)
+
+                return <Pawn key={i} {...pawn} x={x} y={y} size={this.tileSize} />
             })}
         </div>
     }
@@ -34,4 +41,5 @@ export interface GridProps {
      */
     size: number
     tiles: TileModel[]
+    pawns: PawnModel[]
 }

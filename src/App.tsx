@@ -84,10 +84,17 @@ const tiles: TileModel[] = [
   { x: 0, y: 5, next: 'up', type: 'path' },
 ]
 
+const pawns = [
+  { x: 1, y: 4 },
+  { x: 0, y: 1 },
+  { x: 1, y: 0 },
+  { x: 1, y: 1 },
+]
+
 const App = () => (
   <div className="App">
     <Title/>
-    <Grid size={11} tiles={tiles} />
+    <Grid size={11} tiles={tiles} pawns={pawns} />
   </div>
 )
 
