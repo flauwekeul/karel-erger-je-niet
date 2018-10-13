@@ -1,7 +1,23 @@
 .Pawn {
     position: absolute;
-    background: url('/karel.png') var(--color-red) center center no-repeat;
+    background: url('/karel.png') center center no-repeat;
     background-size: 70%;
     border-radius: 999px;
-    box-shadow: 6px 3px 0 3px rgba(1, 1, 1, 0.2)
+    /* box-shadow: 6px 3px 0 3px rgba(1, 1, 1, 0.2) */
+}
+
+.Pawn.red {
+  background-color: var(--color-red);
+}
+
+.Pawn.blue {
+  background-color: var(--color-blue);
+}
+
+.Pawn.green {
+  background-color: var(--color-green);
+}
+
+.Pawn.yellow {
+  background-color: var(--color-yellow);
 }

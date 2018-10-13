@@ -5,9 +5,13 @@
   --color-white: #fff;
   --color-board: #fff9ba;
   --color-red: #f33;
+  --color-red-light: #FF9797;
   --color-blue: #07e;
+  --color-blue-light: #77B2EE;
   --color-green: #2c4;
+  --color-green-light: #76CC87;
   --color-yellow: #fd0;
+  --color-yellow-light: #FFEB66;
 
   --font-stack-fancy: 'Dancing Script', cursive;
 }
@@ -20,4 +24,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: url('/table-top.jpeg') center center no-repeat;
+  background-size: cover;
 }

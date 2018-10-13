@@ -1,11 +1,11 @@
 import * as React from 'react'
 import './App.css'
 import { Grid } from './Grid/Grid'
+import { PawnModel } from './Pawn/Pawn'
 import { Tile, TileModel } from './tile/Tile'
 import { Title } from './Title/Title'
 
-const tiles: TileModel[] = [
-  // start tiles
+const startTiles: TileModel[] = [
   { x: 0, y: 0, color: Tile.colors[0], type: 'start' },
   { x: 1, y: 0, color: Tile.colors[0], type: 'start' },
   { x: 0, y: 1, color: Tile.colors[0], type: 'start' },
@@ -22,8 +22,9 @@ const tiles: TileModel[] = [
   { x: 1, y: 9, color: Tile.colors[3], type: 'start' },
   { x: 0, y: 10, color: Tile.colors[3], type: 'start' },
   { x: 1, y: 10, color: Tile.colors[3], type: 'start' },
+]
 
-  // finish tiles
+const finishTiles: TileModel[] = [
   { x: 1, y: 5, color: Tile.colors[0], type: 'finish' },
   { x: 2, y: 5, color: Tile.colors[0], type: 'finish' },
   { x: 3, y: 5, color: Tile.colors[0], type: 'finish' },
@@ -40,8 +41,9 @@ const tiles: TileModel[] = [
   { x: 5, y: 7, color: Tile.colors[3], type: 'finish' },
   { x: 5, y: 8, color: Tile.colors[3], type: 'finish' },
   { x: 5, y: 9, color: Tile.colors[3], type: 'finish' },
+]
 
-  // path tiles
+const pathTiles: TileModel[] = [
   { x: 0, y: 4, next: 'right', type: 'spawn', color: Tile.colors[0] },
   { x: 1, y: 4, next: 'right', type: 'path' },
   { x: 2, y: 4, next: 'right', type: 'path' },
@@ -84,12 +86,9 @@ const tiles: TileModel[] = [
   { x: 0, y: 5, next: 'up', type: 'path' },
 ]
 
-const pawns = [
-  { x: 1, y: 4 },
-  { x: 0, y: 1 },
-  { x: 1, y: 0 },
-  { x: 1, y: 1 },
-]
+const tiles = [...startTiles, ...finishTiles, ...pathTiles]
+
+const pawns = [...startTiles.map(({ x, y, color }) => ({ x, y, color } as PawnModel))]
 
 const App = () => (
   <div className="App">

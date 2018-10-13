@@ -2,10 +2,12 @@
     position: relative;
     width: 96vmin;
     height: 96vmin;
-    margin: 2vmin auto;
+    margin: 2vmin 40% 2vmin auto;
     border: 5px solid var(--color-red);
     border-radius: 1vmin;
     background-color: var(--color-board);
+    box-shadow: 0 0 3px rgba(1, 1, 1, 0.5);
+    transform: rotate(1deg);
 }
 
 .App::after {
