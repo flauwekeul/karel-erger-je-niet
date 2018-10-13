@@ -1,4 +1,4 @@
-.App {
+.Board {
     position: relative;
     width: 96vmin;
     height: 96vmin;
@@ -10,7 +10,7 @@
     transform: rotate(1deg);
 }
 
-.App::after {
+.Board::after {
     content: '';
     position: absolute;
     top: 5px;
