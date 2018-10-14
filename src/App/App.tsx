@@ -1,7 +1,7 @@
 import * as React from 'react'
-import Board from './Board/Board'
-import { Die, dieValue } from './Die/Die'
-import { randomNumber } from './utils'
+import Board from '../Board/Board'
+import { Die, dieValue } from '../Die/Die'
+import { randomNumber } from '../utils'
 
 class App extends React.PureComponent<{}, AppState> {
     constructor(props: {}) {
