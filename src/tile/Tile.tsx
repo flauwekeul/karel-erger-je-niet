@@ -1,10 +1,9 @@
 import classNames from 'classnames'
 import * as React from 'react'
+import { colorName } from 'src/constants'
 import './Tile.css'
 
 export class Tile extends React.PureComponent<TileProps> {
-    static colors: colors = ['red', 'blue', 'green', 'yellow']
-
     // todo: use styled components?
     render() {
         const { x, y, size, next, color, type } = this.props
@@ -40,9 +39,5 @@ export interface TileProps extends TileModel {
 }
 
 export type tileType = 'start' | 'finish' | 'path' | 'spawn'
-
-export type colorName = 'red' | 'blue' | 'green' | 'yellow'
-
-export type colors = [colorName, colorName, colorName, colorName]
 
 export type direction = 'up' | 'right' | 'down' | 'left'

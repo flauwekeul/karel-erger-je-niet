@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Board from '../Board/Board'
+import { colorName, COLORS } from 'src/constants'
 import { Die, dieValue } from '../Die/Die'
 import { randomNumber } from '../utils'
 

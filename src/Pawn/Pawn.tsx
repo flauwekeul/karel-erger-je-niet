@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import * as React from 'react'
-import { colorName } from 'src/Tile/Tile'
+import { colorName } from 'src/constants'
 import './Pawn.css'
 
 export class Pawn extends React.PureComponent<PawnProps> {
