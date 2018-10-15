@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Grid } from '../Grid/Grid'
 import { PawnModel } from '../Pawn/Pawn'
-import { Tile, TileModel } from '../tile/Tile'
+import { Tile, TileModel } from '../Tile/Tile'
 import { Title } from '../Title/Title'
 import './Board.css'
 

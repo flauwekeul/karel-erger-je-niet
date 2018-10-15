@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Pawn, PawnModel } from 'src/Pawn/Pawn'
-import { Tile, TileModel } from 'src/tile/Tile'
+import { Tile, TileModel } from 'src/Tile/Tile'
 import './Grid.css'
 
 export class Grid extends React.PureComponent<GridProps> {
