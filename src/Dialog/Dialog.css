@@ -1,0 +1,15 @@
+.Dialog {
+    --width: 50vw;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--width);
+    max-height: 70vh;
+    margin: -40vmin 0 0 calc(var(--width) * -0.5);
+    background-color: rgba(1, 1, 1, 0.9);
+    border-radius: 2vmin;
+    color: var(--color-white);
+    padding: 4vmin;
+    text-align: center;
+}

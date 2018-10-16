@@ -98,4 +98,4 @@ const Board = () => (
   </div>
 )
 
-export default Board
+export { Board }

@@ -3,7 +3,8 @@
   "rules": {
     "interface-name": [true, "never-prefix"],
     "member-access": [true, "no-public"],
-    "semicolon": [true, "never"]
+    "semicolon": [true, "never"],
+    "no-console": false
   },
   "linterOptions": {
     "exclude": [

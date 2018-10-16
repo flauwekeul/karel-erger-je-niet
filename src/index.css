@@ -21,10 +21,55 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background: url('/table-top.jpeg') center center no-repeat;
   background-size: cover;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-stack-fancy);
+}
+
+h1 {
+  font-size: 8vmin;
+  margin: 0 0 calc(3vmin * 1.5);
+}
+
+p {
+  font-size: 3vmin;
+  margin: 0 0 calc(3vmin * 1.5);
+}
+
+button {
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+  border-bottom: 3px solid var(--color-blue-light);
+  background-color: var(--color-blue);
+  border-radius: 1vmin;
+  padding: 1.5vmin 2.5vmin;
+  font-size: 3vmin;
+  font-family: sans-serif;
+  text-align: center;
+  outline: none;
+  color: var(--color-white);
+}
+button:hover {
+  background-color: var(--color-blue-light);
+  border-bottom-color: var(--color-white);
+}
+button:active {
+  margin-top: 3px;
+  border-bottom-width: 0;
 }
