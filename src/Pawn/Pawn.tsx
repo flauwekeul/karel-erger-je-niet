@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import * as React from 'react'
 import { colorName } from 'src/constants'
+import { Point } from 'src/point'
 import './Pawn.css'
 
 export class Pawn extends React.PureComponent<PawnProps> {
@@ -22,9 +23,7 @@ export class Pawn extends React.PureComponent<PawnProps> {
     }
 }
 
-export interface PawnModel {
-    x: number
-    y: number
+export interface PawnModel extends Point {
     color: colorName
 }
 

@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import * as React from 'react'
 import { colorName } from 'src/constants'
+import { Point } from 'src/point'
 import './Tile.css'
 
 export class Tile extends React.PureComponent<TileProps> {
@@ -23,9 +24,7 @@ export class Tile extends React.PureComponent<TileProps> {
     }
 }
 
-export interface TileModel {
-    x: number
-    y: number
+export interface TileModel extends Point {
     type: tileType
     color?: colorName
     next?: direction
