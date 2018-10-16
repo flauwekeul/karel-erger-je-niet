@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { colorName, COLORS } from 'src/constants'
+import { colorName, COLORS, FINISH_TILES, PATH_TILES, PAWNS, START_TILES } from 'src/constants'
 import { Dialog } from 'src/Dialog/Dialog'
+import { PawnModel } from 'src/Pawn/Pawn'
+import { TileModel } from 'src/Tile/Tile'
 import { Board } from '../Board/Board'
 import { Die, dieValue } from '../Die/Die'
 import { capitalize, randomNumber, translateColor } from '../utils'
@@ -15,7 +17,9 @@ class App extends React.PureComponent<{}, AppState> {
                 <button onClick={this.start}>Start</button>
             </Dialog>,
             die: randomNumber(1, 6) as dieValue,
+            pawns: [...PAWNS],
             started: false,
+            tiles: START_TILES.concat(PATH_TILES, FINISH_TILES),
         }
     }
 
@@ -43,7 +47,7 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     render() {
-        const { started, die, dialog } = this.state
+        const { tiles, pawns, started, die, dialog } = this.state
 
         if (!started) {
             return dialog
@@ -51,7 +55,7 @@ class App extends React.PureComponent<{}, AppState> {
 
         return (
             <>
-                <Board/>
+                <Board pawns={pawns} tiles={tiles} />
                 <Die value={die} click={this.rollDie} />
                 {dialog}
             </>
@@ -60,10 +64,12 @@ class App extends React.PureComponent<{}, AppState> {
 }
 
 export interface AppState {
-    die: dieValue
     currentColor?: colorName
     dialog?: JSX.Element
+    die: dieValue
+    pawns: PawnModel[]
     started: boolean
+    tiles: TileModel[]
 }
 
 export default App
