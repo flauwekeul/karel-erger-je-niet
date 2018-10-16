@@ -2,6 +2,7 @@ import * as React from 'react'
 import { colorName, COLORS, FINISH_TILES, PATH_TILES, PAWNS, START_TILES } from 'src/constants'
 import { Dialog } from 'src/Dialog/Dialog'
 import { PawnModel } from 'src/Pawn/Pawn'
+import { Point } from 'src/point'
 import { TileModel } from 'src/Tile/Tile'
 import { Board } from '../Board/Board'
 import { Die, dieValue } from '../Die/Die'
@@ -31,19 +32,40 @@ class App extends React.PureComponent<{}, AppState> {
             dialog: (
                 <Dialog>
                     <p>{capitalize(translateColor(currentColor))} mag beginnen!</p>
-                    <button onClick={this.closeDialog}>Ok</button>
+                    <button onClick={this.moveCurrentColorToStart}>Ok</button>
                 </Dialog>
             ),
             started: true
         })
     }
 
+    rollDie = () => {
+        this.setState({ die: randomNumber(1, 6) as dieValue })
+    }
+
+    moveCurrentColorToStart = () => {
+        const { tiles, pawns, currentColor } = this.state
+        const firstPawnOfCurrentColor = pawns.find(({ color }) => color === currentColor) as PawnModel
+        const startTileOfCurrentColor = tiles.find(({ type, color }) => type === 'start' && color === currentColor) as TileModel
+
+        this.movePawn(firstPawnOfCurrentColor, startTileOfCurrentColor)
+        this.closeDialog()
+    }
+
     closeDialog = () => {
         this.setState({ dialog: undefined })
     }
 
-    rollDie = () => {
-        this.setState({ die: randomNumber(1, 6) as dieValue })
+    movePawn = (from: Point, to: Point) => {
+        const { pawns } = this.state
+        const pawnIndex = pawns.findIndex(pawn => Point.equals(pawn, from))
+        const targetPawn = pawns[pawnIndex]
+
+        this.setState({ pawns: [
+            ...pawns.slice(0, pawnIndex),
+            { ...targetPawn, ...to },
+            ...pawns.slice(pawnIndex + 1),
+        ] })
     }
 
     render() {
