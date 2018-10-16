@@ -8,7 +8,7 @@ export class Tile extends React.PureComponent<TileProps> {
     // todo: use styled components?
     render() {
         const { x, y, size, next, color, type } = this.props
-        const spacing = type === 'start' || type === 'finish' ? 0.35 : 0.15
+        const spacing = type === 'base' || type === 'finish' ? 0.35 : 0.15
         const styleSize = (size - (size * spacing)) * 100
         const stylePosition = (coordinate: number) => (coordinate + size * spacing * 0.5) * 100
 
@@ -37,6 +37,6 @@ export interface TileProps extends TileModel {
     size: number
 }
 
-export type tileType = 'start' | 'finish' | 'path' | 'spawn'
+export type tileType = 'base' | 'finish' | 'path' | 'start'
 
 export type direction = 'up' | 'right' | 'down' | 'left'
