@@ -12,26 +12,12 @@ export class Grid extends React.PureComponent<GridProps> {
     }
 
     render() {
-        const { tiles, pawns } = this.props
+        const { tiles, pawns, pawnClick } = this.props
 
         return <div className="Grid">
-            {tiles.map((tile, i) => {
-                const x = this.tilePosition(tile.x)
-                const y = this.tilePosition(tile.y)
-
-                return <Tile key={i} {...tile} x={x} y={y} size={this.tileSize} />
-            })}
-            {pawns.map((pawn, i) => {
-                const x = this.tilePosition(pawn.x)
-                const y = this.tilePosition(pawn.y)
-
-                return <Pawn key={i} {...pawn} x={x} y={y} size={this.tileSize} />
-            })}
+            {tiles.map((tile, i) => <Tile key={i} {...tile} size={this.tileSize} />)}
+            {pawns.map((pawn, i) => <Pawn key={i} pawn={pawn} size={this.tileSize} click={pawnClick} />)}
         </div>
-    }
-
-    private tilePosition(coordinate: number) {
-        return coordinate * this.tileSize
     }
 }
 
@@ -42,4 +28,5 @@ export interface GridProps {
     size: number
     tiles: TileModel[]
     pawns: PawnModel[]
+    pawnClick(pawn: PawnModel): void
 }

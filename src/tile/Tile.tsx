@@ -9,8 +9,9 @@ export class Tile extends React.PureComponent<TileProps> {
     render() {
         const { x, y, size, next, color, type } = this.props
         const spacing = type === 'base' || type === 'finish' ? 0.35 : 0.15
+        // todo: duplicate in Tile.tsx
         const styleSize = (size - (size * spacing)) * 100
-        const stylePosition = (coordinate: number) => (coordinate + size * spacing * 0.5) * 100
+        const stylePosition = (coordinate: number) => (coordinate * size + size * spacing * 0.5) * 100
 
         const className = classNames('Tile', next, color)
         const style = {

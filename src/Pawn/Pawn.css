@@ -1,9 +1,15 @@
 .Pawn {
-    position: absolute;
-    background: url('/karel.png') center center no-repeat;
-    background-size: 70%;
-    border-radius: 999px;
-    /* box-shadow: 6px 3px 0 3px var(--color-shadow) */
+  --transition-time: 1s;
+  --transition-function: ease-in-out;
+
+  cursor: pointer;
+  position: absolute;
+  background: url('/karel.png') center center no-repeat;
+  background-size: 70%;
+  border-radius: 999px;
+  transition: top var(--transition-time) var(--transition-function),
+    left var(--transition-time) var(--transition-function);
+  box-shadow: 6px 3px 20px var(--color-shadow)
 }
 
 .Pawn.red {
