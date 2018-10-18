@@ -1,5 +1,5 @@
 .Die {
-    --time: 500ms;
+    --transition-time: 500ms;
     --timing-function: ease-out;
 
     cursor: pointer;
@@ -9,9 +9,9 @@
     background: radial-gradient(circle, var(--color-white) 70%,#dddddd 100%);
     border-radius: 6px;
     box-shadow: 6px 3px 20px var(--color-shadow);
-    transition: top var(--time) var(--timing-function),
-        left var(--time) var(--timing-function),
-        transform var(--time) var(--timing-function);
+    transition: top var(--transition-time) var(--timing-function),
+        left var(--transition-time) var(--timing-function),
+        transform var(--transition-time) var(--timing-function);
 }
 
 .Die .dot {

@@ -3,7 +3,7 @@ import { colorName, COLORS, FINISH_TILES, PATH_TILES, PAWNS, START_TILES } from 
 import { Dialog } from 'src/Dialog/Dialog'
 import { PawnModel } from 'src/Pawn/Pawn'
 import { Point } from 'src/point'
-import { TileModel } from 'src/Tile/Tile'
+import { direction, TileModel } from 'src/Tile/Tile'
 import { Board } from '../Board/Board'
 import { Die, dieValue } from '../Die/Die'
 import { capitalize, randomNumber, translateColor } from '../utils'
@@ -68,6 +68,33 @@ class App extends React.PureComponent<{}, AppState> {
         ] })
     }
 
+    pawnClick = (pawn: PawnModel) => {
+        this.movePawn(pawn, this.pointAtStepsFrom(pawn, this.state.die))
+    }
+
+    tileAt = (point: Point) => {
+        return this.state.tiles.find(tile => Point.equals(tile, point)) as TileModel
+    }
+
+    pointAtStepsFrom = (point: Point, steps: number): Point | never => {
+        if (steps === 0) {
+            return point
+        }
+
+        const tile = this.tileAt(point)
+        if (!tile.next) {
+            throw new Error(`Not a path tile: ${tile}`)
+        }
+
+        const relativeTile: { [key in direction]: Point } = {
+            'down': new Point(0, 1),
+            'left': new Point(-1, 0),
+            'right': new Point(1, 0),
+            'up': new Point(0, -1),
+        }
+        return this.pointAtStepsFrom(Point.add(point, relativeTile[tile.next]), --steps)
+    }
+
     render() {
         const { tiles, pawns, started, die, dialog } = this.state
 
@@ -77,7 +104,7 @@ class App extends React.PureComponent<{}, AppState> {
 
         return (
             <>
-                <Board pawns={pawns} tiles={tiles} />
+                <Board pawns={pawns} tiles={tiles} pawnClick={this.pawnClick} />
                 <Die value={die} click={this.rollDie} />
                 {dialog}
             </>
