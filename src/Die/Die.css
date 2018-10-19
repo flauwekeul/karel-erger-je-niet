@@ -14,8 +14,12 @@
         transform var(--transition-time) var(--timing-function);
 }
 
+.Die.disabled {
+    cursor: not-allowed;
+}
+
 .Die .dot {
-    --size: 1.2vmin;
+    --size: 1.15vmin;
 
     position: absolute;
     width: var(--size);

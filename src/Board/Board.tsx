@@ -13,19 +13,34 @@ export class Board extends React.PureComponent<BoardProps> {
   }
 
   render() {
-    const { tiles, pawns, pawnClick } = this.props
+    const { tiles, pawns, pawnClick, disabled } = this.props
 
     return <div className="Board">
       <Title/>
       <div className="inner">
-        {tiles.map((tile, i) => <Tile key={i} {...tile} size={this.tileSize} />)}
-        {pawns.map((pawn, i) => <Pawn key={i} pawn={pawn} size={this.tileSize} click={pawnClick} />)}
+        {tiles.map((tile, i) => (
+          <Tile
+            key={i}
+            {...tile}
+            size={this.tileSize} />
+          )
+        )}
+        {pawns.map((pawn, i) => (
+          <Pawn
+            key={i}
+            pawn={pawn}
+            size={this.tileSize}
+            click={pawnClick}
+            disabled={disabled} />
+          )
+        )}
       </div>
     </div>
   }
 }
 
 export interface BoardProps {
+  disabled: boolean
   /**
    * Amount of tiles
    */

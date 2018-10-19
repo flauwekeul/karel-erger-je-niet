@@ -11,7 +11,10 @@ import { capitalize, randomNumber, translateColor } from '../utils'
 class App extends React.PureComponent<{}, AppState> {
     constructor(props: {}) {
         super(props)
+        // todo: don't use state, but just class properties?
+        // https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class
         this.state = {
+            currentAction: 'roll die',
             dialog: <Dialog>
                 <h1>Karel erger je niet!</h1>
                 <p>Klik op start hieronder om een willekeurige speler te kiezen die mag beginnen.</p>
@@ -39,7 +42,10 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     rollDie = () => {
-        this.setState({ die: randomNumber(1, 6) as dieValue })
+        this.setState({
+            currentAction: 'move pawn',
+            die: randomNumber(1, 6) as dieValue,
+        })
     }
 
     moveCurrentColorToStart = () => {
@@ -59,11 +65,14 @@ class App extends React.PureComponent<{}, AppState> {
         const pawnIndex = pawns.findIndex(pawn => Point.equals(pawn, from))
         const targetPawn = pawns[pawnIndex]
 
-        this.setState({ pawns: [
-            ...pawns.slice(0, pawnIndex),
-            { ...targetPawn, ...to },
-            ...pawns.slice(pawnIndex + 1),
-        ] })
+        this.setState({
+            currentAction: 'roll die',
+            pawns: [
+                ...pawns.slice(0, pawnIndex),
+                { ...targetPawn, ...to },
+                ...pawns.slice(pawnIndex + 1),
+            ]
+        })
     }
 
     pawnClick = (pawn: PawnModel) => {
@@ -113,12 +122,20 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     render() {
-        const { tiles, pawns, die, dialog } = this.state
+        const { tiles, pawns, die, dialog, currentAction } = this.state
 
         return (
             <>
-                <Board size={11} tiles={tiles} pawns={pawns} pawnClick={this.pawnClick} />
-                <Die value={die} click={this.rollDie} />
+                <Board
+                    size={11}
+                    tiles={tiles}
+                    pawns={pawns}
+                    pawnClick={this.pawnClick}
+                    disabled={currentAction !== 'move pawn'} />
+                <Die
+                    value={die}
+                    click={this.rollDie}
+                    disabled={currentAction !== 'roll die'} />
                 {dialog}
             </>
         )
@@ -126,6 +143,7 @@ class App extends React.PureComponent<{}, AppState> {
 }
 
 export interface AppState {
+    currentAction: 'roll die' | 'move pawn'
     currentColor?: colorName
     dialog?: JSX.Element
     die: dieValue

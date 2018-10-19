@@ -6,13 +6,13 @@ import './Pawn.css'
 
 export class Pawn extends React.PureComponent<PawnProps> {
     render() {
-        const { pawn, size } = this.props
+        const { pawn, size, disabled } = this.props
         const spacing = 0.3
         // todo: duplicate in Tile.tsx
         const styleSize = size - size * spacing
         const stylePosition = (coordinate: number) => coordinate * size + size * spacing * 0.5
 
-        const className = classNames('Pawn', pawn.color)
+        const className = classNames('Pawn', pawn.color, { disabled })
         const style = {
             height: `${styleSize * 100}%`,
             left: `${stylePosition(pawn.x) * 100}%`,
@@ -24,7 +24,13 @@ export class Pawn extends React.PureComponent<PawnProps> {
     }
 
     handleClick = () => {
-        this.props.click(this.props.pawn)
+        const { click, disabled } = this.props
+
+        if (disabled) {
+            return
+        }
+
+        click(this.props.pawn)
     }
 }
 
@@ -33,6 +39,7 @@ export interface PawnModel extends Point {
 }
 
 export interface PawnProps {
+    disabled: boolean
     pawn: PawnModel
     size: number
     click(pawn: PawnModel): void

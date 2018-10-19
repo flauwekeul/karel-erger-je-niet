@@ -27,3 +27,7 @@
 .Pawn.yellow {
   background-color: var(--color-yellow);
 }
+
+.Pawn.disabled {
+  cursor: not-allowed;
+}
