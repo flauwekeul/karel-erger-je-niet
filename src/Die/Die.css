@@ -15,12 +15,14 @@
 }
 
 .Die .dot {
+    --size: 1.2vmin;
+
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: var(--size);
+    height: var(--size);
     background-color: var(--color-black);
     border-radius: 999px;
-    margin: -5px 0 0 -5px;
+    margin: calc(var(--size) * -0.5) 0 0 calc(var(--size) * -0.5);
 }
 
 .Die.value-1 .dot.top-left,
