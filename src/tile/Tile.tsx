@@ -13,7 +13,9 @@ export class Tile extends React.PureComponent<TileProps> {
         const styleSize = (size - (size * spacing)) * 100
         const stylePosition = (coordinate: number) => (coordinate * size + size * spacing * 0.5) * 100
 
-        const className = classNames('Tile', next, color)
+        const className = classNames('Tile', color, {
+            [next as direction]: type === 'path' || type === 'start'
+        })
         const style = {
             height: `${styleSize}%`,
             left: `${stylePosition(x)}%`,

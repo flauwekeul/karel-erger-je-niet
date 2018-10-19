@@ -44,11 +44,10 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     moveCurrentColorToStart = () => {
-        const { tiles, pawns, currentColor } = this.state
+        const { pawns, currentColor } = this.state
         const firstPawnOfCurrentColor = pawns.find(({ color }) => color === currentColor) as PawnModel
-        const startTileOfCurrentColor = tiles.find(({ type, color }) => type === 'start' && color === currentColor) as TileModel
 
-        this.movePawn(firstPawnOfCurrentColor, startTileOfCurrentColor)
+        this.movePawn(firstPawnOfCurrentColor, this.startTileOfCurrentColor())
         this.closeDialog()
     }
 
@@ -81,9 +80,11 @@ class App extends React.PureComponent<{}, AppState> {
             return point
         }
 
-        const tile = this.tileAt(point)
-        if (!tile.next) {
-            throw new Error(`Not a path tile: ${tile}`)
+        const currentTile = this.tileAt(point)
+        if (!currentTile.next) {
+            const { x, y } = currentTile
+            console.error(`This tile has no next tile: [${x}, ${y}]`)
+            return point
         }
 
         const relativeTile: { [key in direction]: Point } = {
@@ -92,7 +93,24 @@ class App extends React.PureComponent<{}, AppState> {
             'right': new Point(1, 0),
             'up': new Point(0, -1),
         }
-        return this.pointAtStepsFrom(Point.add(point, relativeTile[tile.next]), --steps)
+        const nextPoint = Point.add(point, relativeTile[currentTile.next])
+
+        if (Point.equals(nextPoint, this.startTileOfCurrentColor())) {
+            const finishTileIndex = Math.min(3, steps - 1)
+            return this.finishTilesOfCurrentColor()[finishTileIndex]
+        }
+
+        return this.pointAtStepsFrom(nextPoint, --steps)
+    }
+
+    startTileOfCurrentColor = () => {
+        const { tiles, currentColor } = this.state
+        return tiles.find(({ type, color }) => type === 'start' && color === currentColor) as TileModel
+    }
+
+    finishTilesOfCurrentColor = () => {
+        const { tiles, currentColor } = this.state
+        return tiles.filter(({ type, color }) => type === 'finish' && color === currentColor)
     }
 
     render() {

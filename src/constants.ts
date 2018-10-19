@@ -85,22 +85,22 @@ export const PATH_TILES: TileModel[] = [
 ]
 
 export const FINISH_TILES: TileModel[] = [
-    { x: 1, y: 5, color: COLORS[0], type: 'finish' },
-    { x: 2, y: 5, color: COLORS[0], type: 'finish' },
-    { x: 3, y: 5, color: COLORS[0], type: 'finish' },
+    { x: 1, y: 5, next: 'right', color: COLORS[0], type: 'finish' },
+    { x: 2, y: 5, next: 'right', color: COLORS[0], type: 'finish' },
+    { x: 3, y: 5, next: 'right', color: COLORS[0], type: 'finish' },
     { x: 4, y: 5, color: COLORS[0], type: 'finish' },
-    { x: 5, y: 1, color: COLORS[1], type: 'finish' },
-    { x: 5, y: 2, color: COLORS[1], type: 'finish' },
-    { x: 5, y: 3, color: COLORS[1], type: 'finish' },
+    { x: 5, y: 1, next: 'down', color: COLORS[1], type: 'finish' },
+    { x: 5, y: 2, next: 'down', color: COLORS[1], type: 'finish' },
+    { x: 5, y: 3, next: 'down', color: COLORS[1], type: 'finish' },
     { x: 5, y: 4, color: COLORS[1], type: 'finish' },
+    { x: 9, y: 5, next: 'left', color: COLORS[2], type: 'finish' },
+    { x: 8, y: 5, next: 'left', color: COLORS[2], type: 'finish' },
+    { x: 7, y: 5, next: 'left', color: COLORS[2], type: 'finish' },
     { x: 6, y: 5, color: COLORS[2], type: 'finish' },
-    { x: 7, y: 5, color: COLORS[2], type: 'finish' },
-    { x: 8, y: 5, color: COLORS[2], type: 'finish' },
-    { x: 9, y: 5, color: COLORS[2], type: 'finish' },
+    { x: 5, y: 9, next: 'up', color: COLORS[3], type: 'finish' },
+    { x: 5, y: 8, next: 'up', color: COLORS[3], type: 'finish' },
+    { x: 5, y: 7, next: 'up', color: COLORS[3], type: 'finish' },
     { x: 5, y: 6, color: COLORS[3], type: 'finish' },
-    { x: 5, y: 7, color: COLORS[3], type: 'finish' },
-    { x: 5, y: 8, color: COLORS[3], type: 'finish' },
-    { x: 5, y: 9, color: COLORS[3], type: 'finish' },
 ]
 
 export type colorName = 'red' | 'blue' | 'green' | 'yellow'
