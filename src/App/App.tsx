@@ -19,7 +19,6 @@ class App extends React.PureComponent<{}, AppState> {
             </Dialog>,
             die: randomNumber(1, 6) as dieValue,
             pawns: [...PAWNS],
-            started: false,
             tiles: START_TILES.concat(PATH_TILES, FINISH_TILES),
         }
     }
@@ -31,11 +30,11 @@ class App extends React.PureComponent<{}, AppState> {
             currentColor,
             dialog: (
                 <Dialog>
-                    <p>{capitalize(translateColor(currentColor))} mag beginnen!</p>
+                    <h1>{capitalize(translateColor(currentColor))} mag beginnen!</h1>
+                    <p>Klik op de dobbelsteen om 'm te gooien.</p>
                     <button onClick={this.moveCurrentColorToStart}>Ok</button>
                 </Dialog>
             ),
-            started: true
         })
     }
 
@@ -114,15 +113,11 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     render() {
-        const { tiles, pawns, started, die, dialog } = this.state
-
-        if (!started) {
-            return dialog
-        }
+        const { tiles, pawns, die, dialog } = this.state
 
         return (
             <>
-                <Board pawns={pawns} tiles={tiles} pawnClick={this.pawnClick} />
+                <Board size={11} tiles={tiles} pawns={pawns} pawnClick={this.pawnClick} />
                 <Die value={die} click={this.rollDie} />
                 {dialog}
             </>
@@ -135,7 +130,6 @@ export interface AppState {
     dialog?: JSX.Element
     die: dieValue
     pawns: PawnModel[]
-    started: boolean
     tiles: TileModel[]
 }
 

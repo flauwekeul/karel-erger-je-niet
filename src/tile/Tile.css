@@ -1,67 +1,67 @@
 .Tile {
-    position: absolute;
-    border: 3px solid var(--color-black);
-    border-radius: 999px;
-    background-color: var(--color-white);
+  position: absolute;
+  border: 3px solid var(--color-black);
+  border-radius: 999px;
+  background-color: var(--color-white);
 }
 
 .Tile.red {
-    background-color: var(--color-red-light);
+  background-color: var(--color-red-light);
 }
 
 .Tile.blue {
-    background-color: var(--color-blue-light);
+  background-color: var(--color-blue-light);
 }
 
 .Tile.green {
-    background-color: var(--color-green-light);
+  background-color: var(--color-green-light);
 }
 
 .Tile.yellow {
-    background-color: var(--color-yellow-light);
+  background-color: var(--color-yellow-light);
 }
 
 .Tile.up::after,
 .Tile.right::after,
 .Tile.down::after,
 .Tile.left::after {
-    content: '';
-    position: absolute;
-    background-color: var(--color-black);
+  content: '';
+  position: absolute;
+  background-color: var(--color-black);
 }
 
 .Tile.up::after,
 .Tile.down::after {
-    width: 3px;
-    height: 30%; /* 30% is the tile margin */
+  width: 3px;
+  height: 30%; /* 30% is the tile margin */
 }
 
 .Tile.right::after,
 .Tile.left::after {
-    width: 30%; /* 30% is the tile margin */
-    height: 3px;
+  width: 30%; /* 30% is the tile margin */
+  height: 3px;
 }
 
 .Tile.up::after {
-    bottom: 100%;
-    left: 50%;
-    margin-left: -1.5px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -1.5px;
 }
 
 .Tile.right::after {
-    left: 100%;
-    top: 50%;
-    margin-top: -1.5px;
+  left: 100%;
+  top: 50%;
+  margin-top: -1.5px;
 }
 
 .Tile.down::after {
-    top: 100%;
-    right: 50%;
-    margin-right: -1.5px;
+  top: 100%;
+  right: 50%;
+  margin-right: -1.5px;
 }
 
 .Tile.left::after {
-    right: 100%;
-    bottom: 50%;
-    margin-bottom: -1.5px;
+  right: 100%;
+  bottom: 50%;
+  margin-bottom: -1.5px;
 }

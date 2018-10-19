@@ -10,17 +10,17 @@ export class Tile extends React.PureComponent<TileProps> {
         const { x, y, size, next, color, type } = this.props
         const spacing = type === 'base' || type === 'finish' ? 0.35 : 0.15
         // todo: duplicate in Tile.tsx
-        const styleSize = (size - (size * spacing)) * 100
-        const stylePosition = (coordinate: number) => (coordinate * size + size * spacing * 0.5) * 100
+        const styleSize = size - size * spacing
+        const stylePosition = (coordinate: number) => coordinate * size + size * spacing * 0.5
 
         const className = classNames('Tile', color, {
             [next as direction]: type === 'path' || type === 'start'
         })
         const style = {
-            height: `${styleSize}%`,
-            left: `${stylePosition(x)}%`,
-            top: `${stylePosition(y)}%`,
-            width: `${styleSize}%`,
+            height: `${styleSize * 100}%`,
+            left: `${stylePosition(x) * 100}%`,
+            top: `${stylePosition(y) * 100}%`,
+            width: `${styleSize * 100}%`,
         }
 
         return <div className={className} style={style} />

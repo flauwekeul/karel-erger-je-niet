@@ -1,22 +1,30 @@
 .Board {
-    position: relative;
-    width: 96vmin;
-    height: 96vmin;
-    margin: 2vmin 40% 2vmin auto;
-    border: 5px solid var(--color-red);
-    border-radius: 1vmin;
-    background-color: var(--color-board);
-    box-shadow: 0 0 3px var(--color-shadow);
-    transform: rotate(1deg);
+  position: relative;
+  width: 96vmin;
+  height: 96vmin;
+  margin: 2vmin 40% 2vmin auto;
+  border: 5px solid var(--color-red);
+  border-radius: 1vmin;
+  background-color: var(--color-board);
+  box-shadow: 0 0 3px var(--color-shadow);
+  transform: rotate(1deg);
 }
 
 .Board::after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    bottom: 5px;
-    left: 5px;
-    border: 2px solid var(--color-black);
-    z-index: -1;
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  border: 2px solid var(--color-black);
+  pointer-events: none;
+}
+
+.inner {
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  bottom: 4%;
+  left: 4%;
 }

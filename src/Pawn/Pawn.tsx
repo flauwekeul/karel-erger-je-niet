@@ -9,15 +9,15 @@ export class Pawn extends React.PureComponent<PawnProps> {
         const { pawn, size } = this.props
         const spacing = 0.3
         // todo: duplicate in Tile.tsx
-        const styleSize = (size - (size * spacing)) * 100
-        const stylePosition = (coordinate: number) => (coordinate * size + size * spacing * 0.5) * 100
+        const styleSize = size - size * spacing
+        const stylePosition = (coordinate: number) => coordinate * size + size * spacing * 0.5
 
         const className = classNames('Pawn', pawn.color)
         const style = {
-            height: `${styleSize}%`,
-            left: `${stylePosition(pawn.x)}%`,
-            top: `${stylePosition(pawn.y)}%`,
-            width: `${styleSize}%`,
+            height: `${styleSize * 100}%`,
+            left: `${stylePosition(pawn.x) * 100}%`,
+            top: `${stylePosition(pawn.y) * 100}%`,
+            width: `${styleSize * 100}%`,
         }
 
         return <div className={className} style={style} onClick={this.handleClick} />

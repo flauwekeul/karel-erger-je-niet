@@ -1,21 +1,36 @@
 import * as React from 'react'
-import { TileModel } from 'src/Tile/Tile'
-import { Grid } from '../Grid/Grid'
-import { PawnModel } from '../Pawn/Pawn'
+import { Tile, TileModel } from 'src/Tile/Tile'
+import { Pawn, PawnModel } from '../Pawn/Pawn'
 import { Title } from '../Title/Title'
 import './Board.css'
 
-const Board = ({ pawns, tiles, pawnClick }: BoardProps) => (
-  <div className="Board">
-    <Title/>
-    <Grid size={11} tiles={tiles} pawns={pawns} pawnClick={pawnClick} />
-  </div>
-)
+export class Board extends React.PureComponent<BoardProps> {
+  private tileSize: number
 
-export { Board }
+  constructor(props: BoardProps) {
+    super(props)
+    this.tileSize = 1 / props.size
+  }
+
+  render() {
+    const { tiles, pawns, pawnClick } = this.props
+
+    return <div className="Board">
+      <Title/>
+      <div className="inner">
+        {tiles.map((tile, i) => <Tile key={i} {...tile} size={this.tileSize} />)}
+        {pawns.map((pawn, i) => <Pawn key={i} pawn={pawn} size={this.tileSize} click={pawnClick} />)}
+      </div>
+    </div>
+  }
+}
 
 export interface BoardProps {
-  pawns: PawnModel[]
+  /**
+   * Amount of tiles
+   */
+  size: number
   tiles: TileModel[]
+  pawns: PawnModel[]
   pawnClick(pawn: PawnModel): void
 }
