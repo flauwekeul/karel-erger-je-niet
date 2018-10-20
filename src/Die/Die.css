@@ -6,7 +6,7 @@
     position: absolute;
     width: 6vmin;
     height: 6vmin;
-    background: radial-gradient(circle, var(--color-white) 70%,#dddddd 100%);
+    background: radial-gradient(circle, var(--color-white) 65%, #ccc 100%);
     border-radius: 6px;
     box-shadow: 6px 3px 20px var(--color-shadow);
     transition: top var(--transition-time) var(--timing-function),

@@ -14,12 +14,15 @@ class App extends React.PureComponent<{}, AppState> {
         // todo: don't use state, but just class properties?
         // https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class
         this.state = {
+            activeColor: COLORS[randomNumber(0, 3)],
             currentAction: 'roll die',
-            dialog: <Dialog>
-                <h1>Karel erger je niet!</h1>
-                <p>Klik op start hieronder om een willekeurige speler te kiezen die mag beginnen.</p>
-                <button onClick={this.start}>Start</button>
-            </Dialog>,
+            dialog: (
+                <Dialog>
+                    <h1>Karel erger je niet!</h1>
+                    <p>Klik op start hieronder om een willekeurige speler te kiezen die mag beginnen.</p>
+                    <button onClick={this.start}>Start</button>
+                </Dialog>
+            ),
             die: randomNumber(1, 6) as dieValue,
             pawns: [...PAWNS],
             tiles: START_TILES.concat(PATH_TILES, FINISH_TILES),
@@ -27,15 +30,12 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     start = () => {
-        const currentColor = COLORS[randomNumber(0, 3)]
-
         this.setState({
-            currentColor,
             dialog: (
                 <Dialog>
-                    <h1>{capitalize(translateColor(currentColor))} mag beginnen!</h1>
+                    <h1>{capitalize(translateColor(this.state.activeColor))} mag beginnen!</h1>
                     <p>Klik op de dobbelsteen om 'm te gooien.</p>
-                    <button onClick={this.moveCurrentColorToStart}>Ok</button>
+                    <button onClick={this.moveActiveColorToStart}>Ok</button>
                 </Dialog>
             ),
         })
@@ -48,11 +48,11 @@ class App extends React.PureComponent<{}, AppState> {
         })
     }
 
-    moveCurrentColorToStart = () => {
-        const { pawns, currentColor } = this.state
-        const firstPawnOfCurrentColor = pawns.find(({ color }) => color === currentColor) as PawnModel
+    moveActiveColorToStart = () => {
+        const { pawns, activeColor } = this.state
+        const firstPawnOfActiveColor = pawns.find(({ color }) => color === activeColor) as PawnModel
 
-        this.movePawn(firstPawnOfCurrentColor, this.startTileOfCurrentColor())
+        this.movePawn(firstPawnOfActiveColor, this.startTileOfActiveColor())
         this.closeDialog()
     }
 
@@ -103,26 +103,35 @@ class App extends React.PureComponent<{}, AppState> {
         }
         const nextPoint = Point.add(point, relativeTile[currentTile.next])
 
-        if (Point.equals(nextPoint, this.startTileOfCurrentColor())) {
+        if (Point.equals(nextPoint, this.startTileOfActiveColor())) {
             const finishTileIndex = Math.min(3, steps - 1)
-            return this.finishTilesOfCurrentColor()[finishTileIndex]
+            return this.finishTilesOfActiveColor()[finishTileIndex]
         }
 
         return this.pointAtStepsFrom(nextPoint, --steps)
     }
 
-    startTileOfCurrentColor = () => {
-        const { tiles, currentColor } = this.state
-        return tiles.find(({ type, color }) => type === 'start' && color === currentColor) as TileModel
+    startTileOfActiveColor = () => {
+        const { tiles, activeColor } = this.state
+        return tiles.find(({ type, color }) => type === 'start' && color === activeColor) as TileModel
     }
 
-    finishTilesOfCurrentColor = () => {
-        const { tiles, currentColor } = this.state
-        return tiles.filter(({ type, color }) => type === 'finish' && color === currentColor)
+    finishTilesOfActiveColor = () => {
+        const { tiles, activeColor } = this.state
+        return tiles.filter(({ type, color }) => type === 'finish' && color === activeColor)
+    }
+
+    nextColor = () => {
+        const { activeColor } = this.state
+        const nextColorIndex = COLORS.findIndex(color => color === activeColor) + 1
+        return COLORS[nextColorIndex > 3 ? 0 : nextColorIndex]
     }
 
     render() {
-        const { tiles, pawns, die, dialog, currentAction } = this.state
+        const { tiles, pawns, die, dialog, currentAction, activeColor } = this.state
+        const enabledPawns = pawns.filter(pawn => (
+            pawn.color === activeColor && PATH_TILES.some(tile => Point.equals(tile, pawn))
+        ))
 
         return (
             <>
@@ -131,7 +140,8 @@ class App extends React.PureComponent<{}, AppState> {
                     tiles={tiles}
                     pawns={pawns}
                     pawnClick={this.pawnClick}
-                    disabled={currentAction !== 'move pawn'} />
+                    disabled={currentAction !== 'move pawn'}
+                    enabledPawns={enabledPawns} />
                 <Die
                     value={die}
                     click={this.rollDie}
@@ -144,7 +154,7 @@ class App extends React.PureComponent<{}, AppState> {
 
 export interface AppState {
     currentAction: 'roll die' | 'move pawn'
-    currentColor?: colorName
+    activeColor: colorName
     dialog?: JSX.Element
     die: dieValue
     pawns: PawnModel[]

@@ -13,7 +13,7 @@ export class Board extends React.PureComponent<BoardProps> {
   }
 
   render() {
-    const { tiles, pawns, pawnClick, disabled } = this.props
+    const { tiles, pawns, pawnClick, disabled, enabledPawns } = this.props
 
     return <div className="Board">
       <Title/>
@@ -31,7 +31,7 @@ export class Board extends React.PureComponent<BoardProps> {
             pawn={pawn}
             size={this.tileSize}
             click={pawnClick}
-            disabled={disabled} />
+            disabled={disabled || !enabledPawns.includes(pawn)} />
           )
         )}
       </div>
@@ -41,6 +41,7 @@ export class Board extends React.PureComponent<BoardProps> {
 
 export interface BoardProps {
   disabled: boolean
+  enabledPawns: PawnModel[]
   /**
    * Amount of tiles
    */

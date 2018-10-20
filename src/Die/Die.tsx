@@ -22,10 +22,11 @@ export class Die extends React.PureComponent<DieProps, DieState> {
 
     render() {
         const { value, disabled } = this.props
+        const { style } = this.state
         const className = classNames('Die', `value-${value}`, { disabled })
 
         return (
-            <div className={className} style={this.state.style} onClick={this.handleClick}>
+            <div className={className} style={style} onClick={this.handleClick}>
                 <div className="dot top-left" />
                 <div className="dot top-right" />
                 <div className="dot center-left" />
