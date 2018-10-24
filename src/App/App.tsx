@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { BASE_TILES, colorName, COLORS, FINISH_TILES, PATH_TILES, PAWNS } from 'src/constants'
 import { Dialog } from 'src/Dialog/Dialog'
+import { Help } from 'src/Help/Help'
 import { PawnModel } from 'src/Pawn/Pawn'
 import { Point } from 'src/point'
 import { direction, TileModel } from 'src/Tile/Tile'
@@ -9,6 +10,8 @@ import { Die, dieValue } from '../Die/Die'
 import { capitalize, randomNumber, translateColor } from '../utils'
 
 class App extends React.PureComponent<{}, AppState> {
+    private helpTimeout: NodeJS.Timeout
+
     constructor(props: {}) {
         super(props)
         // todo: don't use state, but just class properties?
@@ -25,6 +28,7 @@ class App extends React.PureComponent<{}, AppState> {
             ),
             die: randomNumber(1, 6) as dieValue,
             pawns: [...PAWNS],
+            showHelp: false,
             tiles: BASE_TILES.concat(PATH_TILES, FINISH_TILES),
         }
     }
@@ -33,6 +37,7 @@ class App extends React.PureComponent<{}, AppState> {
         const ok = () => {
             this.moveActiveColorToStart()
             this.closeDialog()
+            this.startHelpTimer()
         }
 
         this.setState({
@@ -50,7 +55,8 @@ class App extends React.PureComponent<{}, AppState> {
         this.setState({
             currentAction: 'move pawn',
             die: randomNumber(1, 6) as dieValue,
-        })
+            showHelp: false
+        }, this.startHelpTimer)
     }
 
     moveActiveColorToStart = () => {
@@ -85,31 +91,22 @@ class App extends React.PureComponent<{}, AppState> {
         this.movePawn(pawn, newPosition)
         this.setState({
             currentAction: 'roll die',
-        })
+            showHelp: false
+        }, this.startHelpTimer)
 
         if (!isPawnOnBase) {
-            this.activateNextColor()
+            // wait for pawn to finish animating to its next position and an additional second
+            setTimeout(this.activateNextColor, 2000)
         }
     }
 
     activateNextColor = () => {
-        const activeColor = this.nextColor()
-        const ok = () => {
+        this.setState({
+            activeColor: this.nextColor(),
+        }, () => {
             if (this.activePawns().length === 0) {
                 this.moveActiveColorToStart()
             }
-
-            this.closeDialog()
-        }
-
-        this.setState({
-            activeColor,
-            dialog: (
-                <Dialog>
-                    <p>{capitalize(translateColor(activeColor))} is aan de beurt.</p>
-                    <button onClick={ok}>Ok</button>
-                </Dialog>
-            ),
         })
     }
 
@@ -185,11 +182,19 @@ class App extends React.PureComponent<{}, AppState> {
         return pawnsOfActiveColorOnPathTiles
     }
 
+    startHelpTimer = () => {
+        clearTimeout(this.helpTimeout)
+        this.helpTimeout = setTimeout(() => {
+            this.setState({ showHelp: true })
+        }, 5000)
+    }
+
     render() {
-        const { tiles, pawns, die, dialog, currentAction } = this.state
+        const { tiles, pawns, die, dialog, currentAction, activeColor, showHelp } = this.state
 
         return (
             <>
+                <Help show={showHelp} activeColor={activeColor} currentAction={currentAction} />
                 <Board
                     size={11}
                     tiles={tiles}
@@ -208,12 +213,15 @@ class App extends React.PureComponent<{}, AppState> {
 }
 
 export interface AppState {
-    currentAction: 'roll die' | 'move pawn'
+    currentAction: action
     activeColor: colorName
     dialog?: JSX.Element
     die: dieValue
     pawns: PawnModel[]
+    showHelp: boolean
     tiles: TileModel[]
 }
+
+export type action = 'roll die' | 'move pawn'
 
 export default App

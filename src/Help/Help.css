@@ -1,0 +1,31 @@
+.Help {
+    position: absolute;
+    right: 4vmin;
+    background-color: rgba(1, 1, 1, 0.9);
+    border-radius: 2vmin;
+    color: var(--color-white);
+    padding: 2vmin;
+    transition: top 1s ease-in-out;
+}
+.Help.visible {
+    top: 4vmin;
+}
+.Help.hidden {
+    top: -20%;
+}
+
+.Help .red {
+    color: var(--color-red-light);
+}
+
+.Help .blue {
+    color: var(--color-blue-light);
+}
+
+.Help .green {
+    color: var(--color-green-light);
+}
+
+.Help .yellow {
+    color: var(--color-yellow-light);
+}

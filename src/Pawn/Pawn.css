@@ -4,8 +4,6 @@
 
   cursor: pointer;
   position: absolute;
-  background: url('/karel.png') 45% 40% no-repeat;
-  background-size: 70%;
   border-radius: 999px;
   transition: top var(--transition-time) var(--transition-function),
     left var(--transition-time) var(--transition-function);
@@ -30,4 +28,32 @@
 
 .Pawn.disabled {
   cursor: not-allowed;
+}
+
+.Pawn::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url('/karel.png') 45% 40% no-repeat;
+  background-size: 70%;
+}
+
+.Pawn:not(.disabled)::after {
+  animation: wobble 800ms ease-out 5s alternate infinite;
+}
+
+@keyframes wobble {
+  0% {
+    transform: rotate(30deg);
+  }
+  20% {
+    transform: rotate(-30deg);
+  }
+  40% {
+    transform: rotate(30deg);
+  }
+  60%, 100% {
+    transform: rotate(0);
+  }
 }
