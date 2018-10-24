@@ -62,41 +62,50 @@ class App extends React.PureComponent<{}, AppState> {
     moveActiveColorToStart = () => {
         const { pawns, activeColor } = this.state
         const firstPawnOfActiveColor = pawns.find(({ color }) => color === activeColor) as PawnModel
+        const newPawns = this.updatePawns(pawns, firstPawnOfActiveColor, this.startTileOfActiveColor())
 
-        this.movePawn(firstPawnOfActiveColor, this.startTileOfActiveColor())
+        this.setState({ pawns: newPawns })
     }
 
     closeDialog = () => {
         this.setState({ dialog: undefined })
     }
 
-    movePawn = (from: Point, to: Point) => {
-        const { pawns } = this.state
+    updatePawns = (pawns: PawnModel[], from: Point, to: Point) => {
         const pawnIndex = pawns.findIndex(pawn => Point.equals(pawn, from))
         const targetPawn = pawns[pawnIndex]
 
-        this.setState({
-            pawns: [
-                ...pawns.slice(0, pawnIndex),
-                { ...targetPawn, ...to },
-                ...pawns.slice(pawnIndex + 1),
-            ]
-        })
+        return [
+            ...pawns.slice(0, pawnIndex),
+            { ...targetPawn, ...to },
+            ...pawns.slice(pawnIndex + 1),
+        ]
     }
 
-    pawnClick = (pawn: PawnModel) => {
-        const isPawnOnBase = this.tileAt(pawn).type === 'base'
-        const newPosition = isPawnOnBase ? this.startTileOfActiveColor() : this.pointAtStepsFrom(pawn, this.state.die)
+    pawnClick = (clickedPawn: PawnModel) => {
+        const { die } = this.state
+        let { pawns } = this.state
+        const isPawnOnBase = this.tileAt(clickedPawn).type === 'base'
+        const newPosition = isPawnOnBase ? this.startTileOfActiveColor() : this.pointAtStepsFrom(clickedPawn, die)
 
-        this.movePawn(pawn, newPosition)
+        const pawnAtNewPosition = pawns.find(pawn => Point.equals(pawn, newPosition))
+        if (pawnAtNewPosition) {
+            const firstEmptyBaseTile = BASE_TILES.find(tile => (
+                tile.color === pawnAtNewPosition.color && !pawns.some(pawn => Point.equals(pawn, tile))
+            )) as TileModel
+            pawns = this.updatePawns(pawns, pawnAtNewPosition, firstEmptyBaseTile)
+        }
+
+        pawns = this.updatePawns(pawns, clickedPawn, newPosition)
         this.setState({
             currentAction: 'roll die',
-            showHelp: false
+            pawns,
+            showHelp: false,
         }, this.startHelpTimer)
 
         if (!isPawnOnBase) {
-            // wait for pawn to finish animating to its next position and an additional second
-            setTimeout(this.activateNextColor, 2000)
+            // wait for pawn to finish animating to its next position plus some additional time
+            setTimeout(this.activateNextColor, 1500)
         }
     }
 
@@ -143,18 +152,18 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     startTileOfActiveColor = () => {
-        const { tiles, activeColor } = this.state
-        return tiles.find(({ type, color }) => type === 'start' && color === activeColor) as TileModel
+        const { activeColor } = this.state
+        return PATH_TILES.find(({ type, color }) => type === 'start' && color === activeColor) as TileModel
     }
 
     baseTilesOfActiveColor = () => {
-        const { tiles, activeColor } = this.state
-        return tiles.filter(({ type, color }) => type === 'base' && color === activeColor)
+        const { activeColor } = this.state
+        return BASE_TILES.filter(({ color }) => color === activeColor)
     }
 
     finishTilesOfActiveColor = () => {
-        const { tiles, activeColor } = this.state
-        return tiles.filter(({ type, color }) => type === 'finish' && color === activeColor)
+        const { activeColor } = this.state
+        return FINISH_TILES.filter(({ color }) => color === activeColor)
     }
 
     nextColor = () => {
