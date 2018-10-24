@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { colorName, COLORS, FINISH_TILES, PATH_TILES, PAWNS, START_TILES } from 'src/constants'
+import { BASE_TILES, colorName, COLORS, FINISH_TILES, PATH_TILES, PAWNS } from 'src/constants'
 import { Dialog } from 'src/Dialog/Dialog'
 import { PawnModel } from 'src/Pawn/Pawn'
 import { Point } from 'src/point'
@@ -25,7 +25,7 @@ class App extends React.PureComponent<{}, AppState> {
             ),
             die: randomNumber(1, 6) as dieValue,
             pawns: [...PAWNS],
-            tiles: START_TILES.concat(PATH_TILES, FINISH_TILES),
+            tiles: BASE_TILES.concat(PATH_TILES, FINISH_TILES),
         }
     }
 

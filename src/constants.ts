@@ -22,7 +22,7 @@ export const PAWNS: PawnModel[] = [
     { x: 1, y: 10, color: COLORS[3] },
 ]
 
-export const START_TILES: TileModel[] = [
+export const BASE_TILES: TileModel[] = [
     { x: 0, y: 0, color: COLORS[0], type: 'base' },
     { x: 1, y: 0, color: COLORS[0], type: 'base' },
     { x: 0, y: 1, color: COLORS[0], type: 'base' },
