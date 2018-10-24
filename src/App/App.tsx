@@ -58,8 +58,6 @@ class App extends React.PureComponent<{}, AppState> {
         const firstPawnOfActiveColor = pawns.find(({ color }) => color === activeColor) as PawnModel
 
         this.movePawn(firstPawnOfActiveColor, this.startTileOfActiveColor())
-        // prevent going to the next color
-        this.setState({ activeColor })
     }
 
     closeDialog = () => {
@@ -70,25 +68,8 @@ class App extends React.PureComponent<{}, AppState> {
         const { pawns } = this.state
         const pawnIndex = pawns.findIndex(pawn => Point.equals(pawn, from))
         const targetPawn = pawns[pawnIndex]
-        const activeColor = this.nextColor()
-
-        const nextColorStart = () => {
-            if (this.activePawns().length === 0) {
-                this.moveActiveColorToStart()
-            }
-
-            this.closeDialog()
-        }
 
         this.setState({
-            activeColor,
-            currentAction: 'roll die',
-            dialog: (
-                <Dialog>
-                    <p>{capitalize(translateColor(activeColor))} is aan de beurt.</p>
-                    <button onClick={nextColorStart}>Ok</button>
-                </Dialog>
-            ),
             pawns: [
                 ...pawns.slice(0, pawnIndex),
                 { ...targetPawn, ...to },
@@ -98,7 +79,38 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     pawnClick = (pawn: PawnModel) => {
-        this.movePawn(pawn, this.pointAtStepsFrom(pawn, this.state.die))
+        const isPawnOnBase = this.tileAt(pawn).type === 'base'
+        const newPosition = isPawnOnBase ? this.startTileOfActiveColor() : this.pointAtStepsFrom(pawn, this.state.die)
+
+        this.movePawn(pawn, newPosition)
+        this.setState({
+            currentAction: 'roll die',
+        })
+
+        if (!isPawnOnBase) {
+            this.activateNextColor()
+        }
+    }
+
+    activateNextColor = () => {
+        const activeColor = this.nextColor()
+        const ok = () => {
+            if (this.activePawns().length === 0) {
+                this.moveActiveColorToStart()
+            }
+
+            this.closeDialog()
+        }
+
+        this.setState({
+            activeColor,
+            dialog: (
+                <Dialog>
+                    <p>{capitalize(translateColor(activeColor))} is aan de beurt.</p>
+                    <button onClick={ok}>Ok</button>
+                </Dialog>
+            ),
+        })
     }
 
     tileAt = (point: Point) => {
@@ -138,6 +150,11 @@ class App extends React.PureComponent<{}, AppState> {
         return tiles.find(({ type, color }) => type === 'start' && color === activeColor) as TileModel
     }
 
+    baseTilesOfActiveColor = () => {
+        const { tiles, activeColor } = this.state
+        return tiles.filter(({ type, color }) => type === 'base' && color === activeColor)
+    }
+
     finishTilesOfActiveColor = () => {
         const { tiles, activeColor } = this.state
         return tiles.filter(({ type, color }) => type === 'finish' && color === activeColor)
@@ -150,10 +167,22 @@ class App extends React.PureComponent<{}, AppState> {
     }
 
     activePawns = () => {
-        const { pawns, activeColor } = this.state
-        return pawns.filter(pawn => (
+        const { pawns, activeColor, die } = this.state
+        const pawnsOfActiveColorOnPathTiles = pawns.filter(pawn => (
             pawn.color === activeColor && PATH_TILES.some(tile => Point.equals(tile, pawn))
         ))
+
+        if (pawnsOfActiveColorOnPathTiles.length === 0) {
+            return pawnsOfActiveColorOnPathTiles
+        }
+
+        if (die === 6 && !pawns.some(pawn => pawn.color === activeColor && Point.equals(pawn, this.startTileOfActiveColor()))) {
+            return pawns.filter(pawn => (
+                this.baseTilesOfActiveColor().some(tile => Point.equals(tile, pawn))
+            ))
+        }
+
+        return pawnsOfActiveColorOnPathTiles
     }
 
     render() {
