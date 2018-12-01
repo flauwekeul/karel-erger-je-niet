@@ -30,7 +30,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url('/table-top.jpeg') center center no-repeat;
+  background: url('./table-top.jpeg') center center no-repeat;
   background-size: cover;
   line-height: 1.5;
 }
