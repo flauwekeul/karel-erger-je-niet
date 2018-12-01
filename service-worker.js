@@ -15,7 +15,7 @@ importScripts("/karel-erger-je-niet/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/karel-erger-je-niet/workbox-v3.6.3"});
 
 importScripts(
-  "/karel-erger-je-niet/precache-manifest.225df1e5550bb5808b0153baeccac362.js"
+  "/karel-erger-je-niet/precache-manifest.5fed4c1cb493436c702d2fa14b56d546.js"
 );
 
 workbox.clientsClaim();

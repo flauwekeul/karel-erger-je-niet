@@ -1,13 +1,15 @@
 {
-  "main.css": "/karel-erger-je-niet/static/css/main.859c1220.chunk.css",
-  "main.js": "/karel-erger-je-niet/static/js/main.09cd8739.chunk.js",
-  "main.js.map": "/karel-erger-je-niet/static/js/main.09cd8739.chunk.js.map",
+  "main.css": "/karel-erger-je-niet/static/css/main.c6fa2eb3.chunk.css",
+  "main.js": "/karel-erger-je-niet/static/js/main.8684b33e.chunk.js",
+  "main.js.map": "/karel-erger-je-niet/static/js/main.8684b33e.chunk.js.map",
   "static/js/1.9df976b9.chunk.js": "/karel-erger-je-niet/static/js/1.9df976b9.chunk.js",
   "static/js/1.9df976b9.chunk.js.map": "/karel-erger-je-niet/static/js/1.9df976b9.chunk.js.map",
   "runtime~main.js": "/karel-erger-je-niet/static/js/runtime~main.13e18402.js",
   "runtime~main.js.map": "/karel-erger-je-niet/static/js/runtime~main.13e18402.js.map",
-  "static/css/main.859c1220.chunk.css.map": "/karel-erger-je-niet/static/css/main.859c1220.chunk.css.map",
+  "static/css/main.c6fa2eb3.chunk.css.map": "/karel-erger-je-niet/static/css/main.c6fa2eb3.chunk.css.map",
+  "static/media/Pawn.css": "/karel-erger-je-niet/static/media/karel.2eee1e02.png",
+  "static/media/index.css": "/karel-erger-je-niet/static/media/table-top.2bc5d0a4.jpeg",
   "index.html": "/karel-erger-je-niet/index.html",
-  "precache-manifest.225df1e5550bb5808b0153baeccac362.js": "/karel-erger-je-niet/precache-manifest.225df1e5550bb5808b0153baeccac362.js",
+  "precache-manifest.5fed4c1cb493436c702d2fa14b56d546.js": "/karel-erger-je-niet/precache-manifest.5fed4c1cb493436c702d2fa14b56d546.js",
   "service-worker.js": "/karel-erger-je-niet/service-worker.js"
 }
