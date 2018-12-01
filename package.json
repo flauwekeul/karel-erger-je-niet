@@ -4,11 +4,14 @@
   "description": "Game based on \"Mens Erger Je Niet\" and \"Ganzenbord\" for Sinterklaas 2018",
   "author": "Abbe Keultjes <flauwekeul@gmail.com> (http://abbekeultjes.nl/)",
   "license": "MIT",
+  "homepage": "https://abbekeultjes.nl/karel-erger-je-niet",
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "classnames": "2.2.6",
@@ -22,6 +25,7 @@
     "@types/node": "10.12.11",
     "@types/react": "16.7.11",
     "@types/react-dom": "16.0.11",
+    "gh-pages": "2.0.1",
     "typescript": "3.2.1"
   },
   "browserslist": [
