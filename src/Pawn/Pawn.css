@@ -7,7 +7,7 @@
   border-radius: 999px;
   transition: top var(--transition-time) var(--transition-function),
     left var(--transition-time) var(--transition-function);
-  box-shadow: 6px 3px 20px var(--color-shadow);
+  box-shadow: 0.8vmin 0.4vmin 3vmin var(--color-shadow);
 }
 
 .Pawn.red {

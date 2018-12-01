@@ -7,8 +7,8 @@
     width: 6vmin;
     height: 6vmin;
     background: radial-gradient(circle, var(--color-white) 65%, #ccc 100%);
-    border-radius: 6px;
-    box-shadow: 6px 3px 20px var(--color-shadow);
+    border-radius: 0.8vmin;
+    box-shadow: 0.8vmin 0.4vmin 3vmin var(--color-shadow);
     transition: top var(--transition-time) var(--timing-function),
         left var(--transition-time) var(--timing-function),
         transform var(--transition-time) var(--timing-function);

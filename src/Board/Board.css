@@ -3,21 +3,21 @@
   width: 96vmin;
   height: 96vmin;
   margin: 2vmin 40% 2vmin auto;
-  border: 5px solid var(--color-red);
+  border: 0.6vmin solid var(--color-red);
   border-radius: 1vmin;
   background-color: var(--color-board);
-  box-shadow: 0 0 3px var(--color-shadow);
+  box-shadow: 0 0 0.5vmin var(--color-shadow);
   transform: rotate(1deg);
 }
 
 .Board::after {
   content: '';
   position: absolute;
-  top: 5px;
-  right: 5px;
-  bottom: 5px;
-  left: 5px;
-  border: 2px solid var(--color-black);
+  top: 0.8vmin;
+  right: 0.8vmin;
+  bottom: 0.8vmin;
+  left: 0.8vmin;
+  border: 0.2vmin solid var(--color-black);
   pointer-events: none;
 }
 
